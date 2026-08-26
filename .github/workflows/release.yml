@@ -202,7 +202,7 @@ jobs:
             "${{ needs.release-plan.outputs.version }}" \
             "${{ needs.release-plan.outputs.tag }}" >> "$GITHUB_OUTPUT"
 
-  draft-binary-release:
+  publish-binary-release:
     name: 📦 Pack release
     needs: [release-plan, publish-release, win-build, osx-build, linux-build]
     if: ${{ needs.release-plan.outputs.release == 'True' }}
@@ -271,7 +271,7 @@ jobs:
             *.tar.gz
             SHA256SUMS.txt
           tag_name: ${{ needs.publish-release.outputs.tag }}
-          draft: true
+          draft: false
           prerelease: false
           fail_on_unmatched_files: true
           generate_release_notes: true
